@@ -11,8 +11,7 @@ import java.util.Scanner;
 import mensagens.EnviarEmail;
 import mensagens.EnviarMensagens;
 import mensagens.EnviarSMS;
-import relatorios.GerarRelatorioConsulta;
-import relatorios.GerarRelatorioMedico;
+
 /**
  *Classe principal, controla o acesso por perfil (secretaria ou mdico) e chama as classes de gerenciamento de acordo com a opçao do usuario.
  */
@@ -29,10 +28,9 @@ public class Principal {
         lstMedicos.add(medico);
         medico.setAgendamentos(lstConsultas);
         
-        GerenciarPacientes gerPacientes     = new GerenciarPacientes();
-        GerenciarConsultas gerConsultas     = new GerenciarConsultas();
-        GerenciaDadosAdicionais gerAdicionais = new GerenciaDadosAdicionais();
-        GerenciaProntuario gerProntuario    = new GerenciaProntuario();
+        
+        UserMedico usuarioMedico = new UserMedico();
+        UserSecretaria usuarioSecretaria = new UserSecretaria();
         GerarRelatorioConsulta relConsulta  = new GerarRelatorioConsulta();
         GerarRelatorioMedico relMedico      = new GerarRelatorioMedico();
         
@@ -51,11 +49,11 @@ public class Principal {
 
             if (usuario == 1) {
                 menuSecretaria(leitura, lstPacientes, lstConsultas,
-                               lstMedicos, gerPacientes, gerConsultas, relConsulta);
+                               lstMedicos, usuarioSecretaria, relConsulta);
 
             } else if (usuario == 2) {
                 menuMedico(leitura, lstPacientes, lstConsultas,
-                           gerAdicionais, gerProntuario, relMedico, medico);
+                           usuarioMedico, relMedico, medico);
             }
         }
 
@@ -68,8 +66,7 @@ public class Principal {
      */
     static void menuSecretaria(Scanner leitura, ArrayList<Paciente> lstPacientes,
                                ArrayList<Consulta> lstConsultas, ArrayList<Medicos> lstMedicos,
-                               GerenciarPacientes gerPacientes, GerenciarConsultas gerConsultas,
-                               GerarRelatorioConsulta relConsulta) {
+                               UserSecretaria usuarioSecretaria,GerarRelatorioConsulta relConsulta ) {
         int opcao = -1;
         while (opcao != 4) {
 
@@ -85,14 +82,14 @@ public class Principal {
             leitura.nextLine();
 
             if (opcao == 1) {
-                menuGerenciarPacientes(leitura, lstPacientes, gerPacientes);
+                menuGerenciarPacientes(leitura, lstPacientes, usuarioSecretaria);
 
             } else if (opcao == 2) {
                 menuRelatorioConsultas(leitura, lstConsultas, relConsulta);
 
             } else if (opcao == 3) {
                 menuGerenciarConsultas(leitura, lstPacientes, lstConsultas,
-                                       lstMedicos, gerConsultas);
+                                       lstMedicos, usuarioSecretaria);
             }
         }
     }
@@ -103,7 +100,7 @@ public class Principal {
      * gerenciamento de pacientes da secretaria com opcoes de cadastrar, alterar, remover.
      */
     static void menuGerenciarPacientes(Scanner leitura, ArrayList<Paciente> lstPacientes,
-                                       GerenciarPacientes gerPacientes) {
+                                       UserSecretaria usuarioSecretaria) {
         int opcao = -1;
         while (opcao != 4) {
 
@@ -117,18 +114,18 @@ public class Principal {
             leitura.nextLine();
 
             if (opcao == 1) {
-                gerPacientes.cadastrarPaciente(lstPacientes);
+                usuarioSecretaria.cadastrarPaciente(lstPacientes);
 
             } else if (opcao == 2) {
                 Paciente paciente = selecionarPaciente(leitura, lstPacientes);
                 if (paciente != null) {
-                    gerPacientes.atualizarPaciente(paciente);
+                    usuarioSecretaria.atualizarPaciente(paciente);
                 }
 
             } else if (opcao == 3) {
                 Paciente paciente = selecionarPaciente(leitura, lstPacientes);
                 if (paciente != null) {
-                    gerPacientes.removerPaciente(lstPacientes, paciente);
+                    usuarioSecretaria.removerPaciente(lstPacientes, paciente);
                 }
             }
         }
@@ -176,7 +173,7 @@ public class Principal {
      */
     static void menuGerenciarConsultas(Scanner scan, ArrayList<Paciente> listaDePacientes,
                                        ArrayList<Consulta> listaDeConsultas, ArrayList<Medicos> listaDeMedicos,
-                                       GerenciarConsultas gerConsultas) {
+                                       UserSecretaria usuarioSecretaria) {
         int opcao = -1;
         while (opcao != 4) {
 
@@ -193,7 +190,7 @@ public class Principal {
                 Paciente paciente = selecionarPaciente(scan, listaDePacientes);
                 Medicos medico = selecionarMedico(scan, listaDeMedicos);
                 if (paciente != null) {
-                    gerConsultas.cadastrarConsulta(listaDeConsultas, paciente, medico);
+                    usuarioSecretaria.cadastrarConsulta(listaDeConsultas, paciente, medico);
                     //adiciona a consulta tambem nos agendamentos do medico
                     medico.setAgendamentos(listaDeConsultas);
                 }
@@ -201,13 +198,13 @@ public class Principal {
             } else if (opcao == 2) {
                 Consulta consulta = selecionarConsulta(scan, listaDeConsultas);
                 if (consulta != null) {
-                    gerConsultas.atualizarConsulta(consulta);
+                    usuarioSecretaria.atualizarConsulta(consulta);
                 }
 
             } else if (opcao == 3) {
                 Consulta consulta = selecionarConsulta(scan, listaDeConsultas);
                 if (consulta != null) {
-                    gerConsultas.removerConsulta(listaDeConsultas, consulta);
+                    usuarioSecretaria.removerConsulta(listaDeConsultas, consulta);
                 }
             }
         }
@@ -220,8 +217,7 @@ public class Principal {
      */
     static void menuMedico(Scanner scan, ArrayList<Paciente> listaDePacientes,
                            ArrayList<Consulta> listaDeConsultas,
-                           GerenciaDadosAdicionais gerAdicionais,
-                           GerenciaProntuario gerProntuario,
+                           UserMedico usuarioMedico,
                            GerarRelatorioMedico relMedico, Medicos medico) {
         int opcao = -1;
         while (opcao != 4) {
@@ -238,10 +234,10 @@ public class Principal {
             scan.nextLine();
 
             if (opcao == 1) {
-                menuDadosAdicionais(scan, listaDePacientes, gerAdicionais);
+                menuDadosAdicionais(scan, listaDePacientes, usuarioMedico);
 
             } else if (opcao == 2) {
-                menuProntuario(scan, listaDePacientes, gerProntuario);
+                menuProntuario(scan, listaDePacientes, usuarioMedico);
 
             } else if (opcao == 3) {
                 menuRelatorioMedico(scan, listaDeConsultas, relMedico, medico);
@@ -253,7 +249,7 @@ public class Principal {
      * gerenciamento dos dados adicionais de saude do paciente, acesso exclusivo do medico.
      */
     static void menuDadosAdicionais(Scanner scan, ArrayList<Paciente> listaDePacientes,
-                                    GerenciaDadosAdicionais gerAdicionais) {
+                                    UserMedico usuarioMedico) {
         int opcao = -1;
         while (opcao != 4) {
 
@@ -269,7 +265,7 @@ public class Principal {
             if (opcao == 1) {
                 Paciente paciente = selecionarPaciente(scan, listaDePacientes);
                 if (paciente != null) {
-                    gerAdicionais.CadastraDadosAdicionais(paciente);
+                    usuarioMedico.CadastraDadosAdicionais(paciente);
                 }
 
             } else if (opcao == 2) {
@@ -278,7 +274,7 @@ public class Principal {
                     if (paciente.getAdicionais() == null) {
                         System.out.println("Este paciente não tem dados adicionais cadastrados.");
                     } else {
-                        gerAdicionais.AtualizaDadosAdicionais(paciente);
+                        usuarioMedico.AtualizaDadosAdicionais(paciente);
                     }
                 }
 
@@ -288,7 +284,7 @@ public class Principal {
                     if (paciente.getAdicionais() == null) {
                         System.out.println("Este paciente não tem dados adicionais cadastrados.");
                     } else {
-                        gerAdicionais.RemoveDadosAdicionais(paciente);
+                        usuarioMedico.RemoveDadosAdicionais(paciente);
                     }
                 }
             }
@@ -299,7 +295,7 @@ public class Principal {
     /**gerenciamento de prontuarios com acesso exclusivo do medico.
      */
     static void menuProntuario(Scanner leitura, ArrayList<Paciente> lstPacientes,
-                               GerenciaProntuario gerProntuario) {
+                               UserMedico usuarioMedico) {
         int opcao = -1;
         while (opcao != 4) {
 
@@ -315,7 +311,7 @@ public class Principal {
             if (opcao == 1) {
                 Paciente paciente = selecionarPaciente(leitura, lstPacientes);
                 if (paciente != null) {
-                    gerProntuario.CadastraProntuarioPaciente(paciente);
+                    usuarioMedico.CadastraProntuarioPaciente(paciente);
                 }
 
             } else if (opcao == 2) {
@@ -324,7 +320,7 @@ public class Principal {
                     if (paciente.getProntuario() == null) {
                         System.out.println("Este paciente não tem prontuario cadastrado.");
                     } else {
-                        gerProntuario.AlterarProntuario(paciente);
+                        usuarioMedico.AlterarProntuario(paciente);
                     }
                 }
 
@@ -334,7 +330,7 @@ public class Principal {
                     if (paciente.getProntuario() == null) {
                         System.out.println("Este paciente não tem prontuario cadastrado.");
                     } else {
-                        gerProntuario.ExcluirProntuario(paciente);
+                        usuarioMedico.ExcluirProntuario(paciente);
                     }
                 }
             }
