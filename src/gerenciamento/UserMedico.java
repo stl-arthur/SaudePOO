@@ -12,7 +12,7 @@ import pojos.Prontuario;
  *
  * @author arthur
  */
-public class UserMedico extends GerarRelatorioMedico implements GerenciaDadosAdicionais, GerenciaProntuario{
+public class UserMedico implements GerenciaDadosAdicionais, GerenciaProntuario{
     
     Scanner scan = new Scanner(System.in);
     
