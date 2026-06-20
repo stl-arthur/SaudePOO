@@ -7,7 +7,6 @@ package pojos;
 
  * Classe de informações adicionais, separada do cliente para melhor controle de acesso por parte do médico e também 
  * para que a classe de Paciente fique mais limpa
- * @author Giovana B
  */
 public class InfoAdicionais {
     private Paciente paciente;
