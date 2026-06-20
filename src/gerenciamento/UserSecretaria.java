@@ -14,7 +14,7 @@ import pojos.Paciente;
  *
  * @author arthur
  */
-public class UserSecretaria extends GerarRelatorioConsulta  implements GerenciarConsultas, GerenciarPacientes{
+public class UserSecretaria implements GerenciarConsultas, GerenciarPacientes{
     
     Scanner scan = new Scanner(System.in);
 
