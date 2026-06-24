@@ -1,6 +1,5 @@
 package gerenciamento;
 
-import java.util.Scanner;
 import pojos.Paciente;
 import java.util.ArrayList;
 
