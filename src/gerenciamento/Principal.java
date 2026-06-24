@@ -1,3 +1,16 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
@@ -14,7 +27,7 @@ import mensagens.EnviarSMS;
 import relatorios.GerarRelatorioConsulta;
 import relatorios.GerarRelatorioMedico;
 /**
- *Classe principal, controla o acesso por perfil (secretaria ou mdico) e chama as classes de gerenciamento de acordo com a opçao do usuario.
+ *Classe principal, controla o acesso por perfil (secretaria ou medico) e chama as classes de gerenciamento de acordo com a opçao do usuario.
  */
 public class Principal {
     public static void main(String[] args){
