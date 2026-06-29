@@ -3,13 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package pojos;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 /**
 
  * Classe de informações adicionais, separada do cliente para melhor controle de acesso por parte do médico e também 
  * para que a classe de Paciente fique mais limpa
  * @author Giovana B
  */
+@Entity
 public class InfoAdicionais {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer Id;
     private Paciente paciente;
     private boolean fuma,bebe,colesterol,doencaCardiaca;
     private String cirurgia;
@@ -29,6 +37,15 @@ public class InfoAdicionais {
         this.alergia = alergia;
     }
 
+    public Integer getId() {
+        return Id;
+    }
+
+    public void setId(Integer Id) {
+        this.Id = Id;
+    }
+    
+    
     public Paciente getPaciente() {
         return paciente;
     }

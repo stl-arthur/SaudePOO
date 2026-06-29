@@ -3,7 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package pojos;
-
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
 
@@ -11,7 +14,11 @@ package pojos;
  * a classe Paciente fique mais limpa
  * @author Giovana B
  */
+@Entity
 public class Prontuario {
+    @Id
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer Id;
     private Paciente paciente;
     private String sintomas;
     private String diagnostico;
@@ -28,8 +35,15 @@ public class Prontuario {
         this.diagnostico = diagnostico;
         this.prescricao = prescricao;
     }
+
+    public Integer getId() {
+        return Id;
+    }
+
+    public void setId(Integer Id) {
+        this.Id = Id;
+    }
     
-     
     public String getSintomas() {
         return sintomas;
     }
