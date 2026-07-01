@@ -35,6 +35,8 @@ public class UserSecretaria implements GerenciarConsultas, GerenciarPacientes, G
         
         System.out.println("Data da consulta (dd/mm/aaaa):");
         consulta.setData(scan.next());
+        consulta.setData(scan.nextLine());
+
         scan.nextLine();
         
         String horario = "";
@@ -42,6 +44,7 @@ public class UserSecretaria implements GerenciarConsultas, GerenciarPacientes, G
         while (conflito) {
             System.out.println("Horário (hh:mm):");
             horario = scan.nextLine();
+            scan.nextLine();
 
             // aceita direto se não tem consultas agendadas
             if (consultasMedico.isEmpty()) {
@@ -119,10 +122,12 @@ public class UserSecretaria implements GerenciarConsultas, GerenciarPacientes, G
                 case 1:
                     System.out.println("Nova data (dd/mm/aaaa):");
                     consulta.setData(scan.nextLine());
+                    scan.nextLine();
+
                     break;
                 case 2:
                     System.out.println("Novo horário (hh:mm):");
-                    consulta.setHorario(scan.next());
+                    consulta.setHorario(scan.nextLine());
                     break;
                 case 3:
                     System.out.println("Tipo:\n1 - Normal (n) (60 min)\n2 - Retorno (r) (30 min)");

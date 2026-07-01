@@ -2,15 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package pojos;
-
-
+package pojos;/*
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+*/
 /**
 
  * Classe relacionada ao Paciente, aqui guardaremos todas suas informações, e também, seu prontuário e informações adicionais,
  * essas, tem suas classes em específico
  */
+//@Entity
+//@Table(name = "Paciente")
+
 public class Paciente {
+    //@Id
+    //@GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer Id;
     private String nome;
     private String identificacao;
     private String dtNascimento;
@@ -35,6 +45,14 @@ public class Paciente {
     }
     /*Deixar claro na implementação para o usuário digitar o numero referente ao tipo de convenio dele*/
 
+    public Integer getId() {
+        return Id;
+    }
+
+    public void setId(Integer Id) {
+        this.Id = Id;
+    }
+    
     public String getNome() {
         return nome;
     }

@@ -3,13 +3,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package pojos;
-
+/*
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;*/
 /**
  * Representa uma consulta agendada na clinica.
  * Relaciona um paciente, um médico, data/horario e tipo de consulta
  * @author Giovana B
 */
+//@Entity
 public class Consulta {
+    /*@Id
+    @GeneratedValue(strategy=GenerationType.AUTO)*/
+    private Integer Id;
     private String data;
     private String horario;
     private Medicos medico;
@@ -22,6 +30,14 @@ public class Consulta {
         this.medico = medico;
         this.paciente = paciente;
         this.tipoConsulta = tipoConsulta;
+    }
+
+    public Integer getId() {
+        return Id;
+    }
+
+    public void setId(Integer Id) {
+        this.Id = Id;
     }
 
     

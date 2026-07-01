@@ -4,11 +4,21 @@
  */
 package pojos;
 import java.util.ArrayList;
+/*import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;*/
 /**
  * @author Giovana B
 */
+//@Entity
+//@Table (name = "MEDICOS")
 
 public class Medicos {
+    //@Id
+    //@GeneratedValue(strategy=GenerationType.AUTO)
+    private Integer Id;
     private String nome;
     private String crm;
     private String especialidade;
@@ -24,6 +34,14 @@ public class Medicos {
         this.especialidade = especialidade;
     }
 
+    public Integer getId() {
+        return Id;
+    }
+
+    public void setId(Integer Id) {
+        this.Id = Id;
+    }
+    
     public String getNome() {
         return nome;
     }

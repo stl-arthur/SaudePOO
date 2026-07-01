@@ -8,15 +8,22 @@ import pojos.Consulta;
 import pojos.Medicos;
 import java.util.ArrayList;
 import java.util.Scanner;
+/*
 import mensagens.EnviarEmail;
 import mensagens.EnviarMensagens;
 import mensagens.EnviarSMS;
-
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;*/
 /**
  *Classe principal, controla o acesso por perfil (secretaria ou mdico) e chama as classes de gerenciamento de acordo com a opçao do usuario.
  */
 public class Principal {
     public static void main(String[] args){
+        
+        //EntityManagerFactory emf = Persistence.createEntityManagerFactory("JPA3UP");
+        //EntityManager em = emf.createEntityManager();
+      
         
         Scanner leitura = new Scanner(System.in);
         
@@ -62,6 +69,8 @@ public class Principal {
 
         System.out.println("Sistema encerrado.");
         leitura.close();
+       /* em.close();
+        emf.close();*/
     }
   
     /**
@@ -484,4 +493,6 @@ public class Principal {
 
         return lstConsultas.get(num - 1);
     }
+        
 }
+            
