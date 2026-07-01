@@ -11,10 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
+/**
+ * @author Giovana B
+*/
 @Entity
 @Table (name = "MEDICO")
-
 
 public class Medicos {
     @Id
