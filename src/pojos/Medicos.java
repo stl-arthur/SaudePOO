@@ -5,7 +5,6 @@
 package pojos;
 import java.util.ArrayList;
 /**
- * @author Giovana B
 */
 
 public class Medicos {
