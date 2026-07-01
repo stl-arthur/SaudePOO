@@ -3,10 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package pojos;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -27,7 +29,9 @@ public class Paciente {
     private String endereco;
     private String contato;
     private int tipoConvenio;
+    @OneToOne (cascade = CascadeType.ALL)
     private Prontuario prontuario;
+    @OneToOne (cascade = CascadeType.ALL)
     private InfoAdicionais adicionais;
 
     public Paciente() {

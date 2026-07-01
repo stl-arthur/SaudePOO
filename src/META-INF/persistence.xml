@@ -7,11 +7,11 @@
     <class>pojos.Medicos</class>
     <class>pojos.Prontuario</class>
     <properties>
+      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/BDPOO"/>
       <property name="javax.persistence.jdbc.user" value="giovana"/>
       <property name="javax.persistence.jdbc.driver" value="org.apache.derby.client.ClientAutoloadedDriver"/>
       <property name="javax.persistence.jdbc.password" value="Anapaula42"/>
-      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
     </properties>
   </persistence-unit>
 </persistence>

@@ -3,10 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package pojos;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 /**
  * Representa uma consulta agendada na clinica.
  * Relaciona um paciente, um médico, data/horario e tipo de consulta
@@ -19,7 +21,9 @@ public class Consulta {
     private Integer Id;
     private String data;
     private String horario;
+    @ManyToOne (cascade = CascadeType.ALL)
     private Medicos medico;
+    @ManyToOne (cascade = CascadeType.ALL)
     private Paciente paciente;
     private String tipoConsulta;
     

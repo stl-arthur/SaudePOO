@@ -3,11 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package pojos;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+import javax.persistence.OneToOne;
 /**
 
  * Classe de prontuario, separada de Paciente para melhor controle de acesso para o médico e para que 
@@ -19,6 +20,7 @@ public class Prontuario {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer Id;
+    @OneToOne (cascade = CascadeType.ALL)
     private Paciente paciente;
     private String sintomas;
     private String diagnostico;

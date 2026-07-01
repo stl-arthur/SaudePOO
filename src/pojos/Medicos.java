@@ -4,16 +4,18 @@
  */
 package pojos;
 import java.util.ArrayList;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 /**
  * @author Giovana B
 */
 @Entity
-@Table (name = "MEDICOS")
+@Table (name = "MEDICO")
 
 public class Medicos {
     @Id
@@ -22,6 +24,7 @@ public class Medicos {
     private String nome;
     private String crm;
     private String especialidade;
+    @OneToMany (cascade = CascadeType.ALL)
     private ArrayList<Consulta> agendamentos;
     
     public Medicos(){

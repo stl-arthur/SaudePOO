@@ -3,10 +3,12 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package pojos;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 /**
 
  * Classe de informações adicionais, separada do cliente para melhor controle de acesso por parte do médico e também 
@@ -18,6 +20,7 @@ public class InfoAdicionais {
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer Id;
+    @OneToOne (cascade = CascadeType.ALL)
     private Paciente paciente;
     private boolean fuma,bebe,colesterol,doencaCardiaca;
     private String cirurgia;
