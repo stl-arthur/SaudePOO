@@ -42,6 +42,7 @@ public class Principal {
             System.out.println("========================================");
             System.out.println("1 - Secretaria");
             System.out.println("2 - Medico");
+            System.out.println("3 - Gerenciador de Mensagens");
             System.out.println("0 - Sair");
             System.out.print("Escolha o perfil de acesso: ");
             usuario = leitura.nextInt();
@@ -54,6 +55,8 @@ public class Principal {
             } else if (usuario == 2) {
                 menuMedico(leitura, lstPacientes, lstConsultas,
                            userMed, medico);
+            } else if (usuario == 3){
+                menuGerMsg(leitura, lstConsultas);
             }
         }
 
@@ -141,30 +144,6 @@ public class Principal {
 
         secretaria.gerarRelatorio(lstConsultas, dataAmanha);
 
-        // envia lembretes via email ou sms para cada consulta do dia seguinte
-        System.out.println("\n--- Enviando lembretes ---");
-        for (int i = 0; i < lstConsultas.size(); i++) {
-            Consulta consulta = lstConsultas.get(i);
-
-            // verifica se a data da consulta e igual a data informada
-            if (consulta.getData().equals(dataAmanha)) {
-                String contato = consulta.getPaciente().getContato();
-                EnviarMensagens msg;
-
-                // se o contato comeca com 'E' e email, senao e telefone (SMS)
-                if (contato.charAt(0) == 'E') {
-                    msg = new EnviarEmail();
-                } else {
-                    msg = new EnviarSMS();
-                }
-
-                msg.enviar(
-                    consulta.getPaciente().getNome(),
-                    consulta.getData(),
-                    consulta.getHorario()
-                );
-            }
-        }
     }
 
     /**
@@ -388,6 +367,30 @@ public class Principal {
             }
         }
     }
+    
+    
+    static void menuGerMsg(Scanner leitura, ArrayList<Consulta> lstConsulta){
+        
+        System.out.println("\n========================================");
+        System.out.println("     GERENCIADOR DE MENSAGENS");
+        System.out.println("========================================");
+        
+        
+        System.out.print("\nInforme a data do dia seguinte (dd/mm/aaaa): ");
+        String dataAmanha = leitura.nextLine();
+        
+        System.out.println("\nDeseja enviar mensagens para os pacientes com consultas agendadas em " + dataAmanha + "?");
+        System.out.println("1 - sim\n0 - não");
+        byte op = leitura.nextByte();
+        
+        if (op == 1){
+        
+            UserGerenciadorMsg msg = new UserGerenciadorMsg();
+
+            msg.enviarMensagem(lstConsulta, dataAmanha);
+        }
+      
+    }
 
    
     /**
@@ -440,7 +443,7 @@ public class Principal {
         
         System.out.println("Número do médico: ");
         int num = leitura.nextInt();
-        leitura.nextLine();
+        
         
         if (num < 1 || num > lstMedicos.size()){
             System.out.println("Opção inválida.");
