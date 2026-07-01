@@ -34,7 +34,9 @@ public class UserSecretaria implements GerenciarConsultas, GerenciarPacientes, G
         ArrayList<Consulta> consultasMedico = medico.getAgendamentos();
         
         System.out.println("Data da consulta (dd/mm/aaaa):");
+        consulta.setData(scan.next());
         consulta.setData(scan.nextLine());
+
         scan.nextLine();
         
         String horario = "";
@@ -121,6 +123,7 @@ public class UserSecretaria implements GerenciarConsultas, GerenciarPacientes, G
                     System.out.println("Nova data (dd/mm/aaaa):");
                     consulta.setData(scan.nextLine());
                     scan.nextLine();
+
                     break;
                 case 2:
                     System.out.println("Novo horário (hh:mm):");
@@ -168,7 +171,8 @@ public class UserSecretaria implements GerenciarConsultas, GerenciarPacientes, G
     @Override
     public void cadastrarPaciente(ArrayList<Paciente> listaDePacientes) {
         Paciente paciente = new Paciente();
-
+        scan.nextLine();
+        
         System.out.println("Nome do paciente:");
         paciente.setNome(scan.nextLine());
        
